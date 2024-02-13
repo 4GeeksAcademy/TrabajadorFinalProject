@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../../styles/TrabajadorCard.css';
+import '../../styles/TrabajadorCard.css';
 
 const TrabajadorCard = ({ image, name, description }) => {
     return (

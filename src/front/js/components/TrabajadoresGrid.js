@@ -1,6 +1,6 @@
 import React from 'react';
-import TrabajadorCard from '../TrabajadorCard/TrabajadorCard';
-import '../../../styles/TrabajadoresGrid.css';
+import TrabajadorCard from './TrabajadorCard';
+import '../../styles/TrabajadoresGrid.css';
 
 const TrabajadoresGrid = ({ trabajadores }) => {
   return (
