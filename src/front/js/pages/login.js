@@ -58,9 +58,16 @@ const Login = () => {
         body: JSON.stringify({ username: loginUsername, password: loginPassword }),
       });
       const data = await response.json();
-      setMessage(data.message);
+      if (response.ok) {
+        setMessage(data.message);
+      } else {
+        // Handle error response
+        setMessage('Login failed. Please try again.');
+      }
     } catch (error) {
+      // Handle network or other errors
       console.error('Error:', error);
+      setMessage('An error occurred. Please try again later.');
     }
   };
 
