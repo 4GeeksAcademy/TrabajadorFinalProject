@@ -1,0 +1,67 @@
+.container {
+    width: 900px;
+}
+.Jumbotron {
+    background-color:#2288E6;
+    height: 250px;
+}
+.Jumbotron h1 {
+    color: white;
+    text-align: center;
+    font-size: 60px;
+    margin-bottom: 15px;
+    margin-top: 30px;
+}
+.Jumbotron p {
+    color: white;
+    text-align: center;
+    font-size: 20px;
+}
+.Form h1{ 
+    color: #2288E6;
+}
+.Form {
+    border: solid 1px;
+    padding: 15px;
+    display: flex;
+    padding-left: 50px;
+}
+.form-control::placeholder {
+    font-weight: bold;
+}
+
+.form-control {
+    width: 400px !important;
+    background-color: rgb(233, 233, 233);
+    
+    border-radius: 15px;
+}
+.blueBar {
+    height: 25px;
+    color: #2288E6;
+    background-color:#2288E6 ;
+    margin-bottom: 0;
+    margin-top: 50px;
+    border: solid 1px black;
+    margin-bottom: -1px;
+}
+.Photo {
+    margin-left: auto;
+    margin-right: auto;
+}
+.Icons {
+        display: flex;
+        flex-direction: column;
+        margin-right: 5px;
+        color: rgb(104, 104, 104);
+}
+.Icons .Profile {
+    margin-top: 60px;
+    margin-bottom: 30px;
+}
+.submit {
+    margin-top: 20px;
+    
+    font-size: 30px !important;
+    padding: 10px 153px !important;
+}

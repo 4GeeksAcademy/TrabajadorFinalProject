@@ -8,6 +8,7 @@ import Footer from "./components/footer";
 import HomePage from "./pages/HomePage";
 import ServicesPage from "./pages/ServicesPage";
 import injectContext from "./store/appContext";
+import ContactUs from "./pages/ContactUs";
 
 
 // Create your first component
@@ -25,6 +26,7 @@ const Layout = () => {
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />
                     <Route path="/services" element={<ServicesPage />} />
+                    <Route path="/contact-us" element={<ContactUs />}/>
                     {/* <Route path="*" element={<h1>Not found!</h1>} /> */}
                 </Routes>
                 {/* <Footer /> */}
