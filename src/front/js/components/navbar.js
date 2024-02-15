@@ -9,8 +9,9 @@ const Navbar = () => {
       <Link className="navbar-brand" to="/">
         <img src={logo} alt="Trabajador Logo" />
       </Link>
-      <div className="collapse navbar-collapse">
-        <ul className="navbar-nav ml-auto">
+      <div className="container-fluid">
+        {/* I need to find a way to right align the navbar links */}
+        <ul className="navbar-nav">
           <li className="nav-item"><Link className="nav-link" to="/home">Home</Link></li>
           <li className="nav-item"><Link className="nav-link" to="/about-us">About Us</Link></li>
           <li className="nav-item"><Link className="nav-link" to="/services">Services</Link></li>

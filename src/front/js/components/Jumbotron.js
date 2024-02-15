@@ -6,7 +6,7 @@ const Jumbotron = () => {
     <div className="jumbotron jumbotron-fluid">
 
       <video autoplay loop muted>
-        <source src="../../videos/TrabajadorJumbotronVideo_V1.mp4" type="video/mp4" />
+        <source src="../../video/TrabajadorJumbotronVideo_V1.mp4" type="video/mp4" />
       </video>
 
       <div className="container">

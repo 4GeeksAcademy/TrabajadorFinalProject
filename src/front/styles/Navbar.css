@@ -1,0 +1,36 @@
+/* Navbar.css */
+
+.navbar {
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand img {
+    height: 60px;
+}
+
+.navbar-nav .nav-item .nav-link {
+    color: #1F303B;
+    font-weight: 500;
+    padding: 0.75em 1em;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    color: #0F9AD7;
+}
+
+.navbar-nav .nav-item.active .nav-link,
+.navbar-nav .nav-item .nav-link.active {
+    color: #0F9AD7;
+    border-bottom: 2px solid #0F9AD7;
+}
+
+@media (max-width: 991px) {
+    .navbar-collapse {
+        margin-top: 1em;
+    }
+
+    .navbar-nav .nav-item {
+        padding: 0;
+    }
+}
