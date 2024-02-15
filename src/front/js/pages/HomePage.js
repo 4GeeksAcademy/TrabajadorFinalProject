@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from '../components/navbar';
 import Jumbotron from '../components/Jumbotron';
+import AboutUs from '../components/AboutUs';
 import ServiceCard from '../components/ServiceCard';
 import CompanyPartnersCarousel from '../components/CompanyPartnersCarousel';
 import TrabajadoresGrid from '../components/TrabajadoresGrid';
@@ -11,6 +12,7 @@ const HomePage = () => {
     <div>
       <Navbar />
       <Jumbotron />
+      <AboutUs />
       <section className="service-cards">
         <h2>Services Offered</h2>
         <ServiceCard />
@@ -29,4 +31,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-

@@ -1,0 +1,35 @@
+.about-us-section {
+    background: url('../img/rigo-baby.jpg') no-repeat center center;
+    background-size: cover;
+    color: #1F303B;
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.about-us-content h1 {
+    margin-bottom: 0.5rem;
+    font-size: 2.5rem;
+}
+
+.about-us-content h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.about-us-content p {
+    margin-bottom: 2rem;
+}
+
+.about-us-btn {
+    background-color: #0F9AD7;
+    color: #FFFFFF;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.about-us-btn:hover {
+    background-color: #1F303B;
+}
