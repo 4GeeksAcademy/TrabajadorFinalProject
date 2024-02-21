@@ -1,16 +1,13 @@
 import React from 'react';
-import Navbar from '../components/navbar';
-import Jumbotron from '../components/Jumbotron';
-import AboutUs from '../components/AboutUs';
-import ServiceCard from '../components/ServiceCard';
-import CompanyPartnersCarousel from '../components/CompanyPartnersCarousel';
-import TrabajadoresGrid from '../components/TrabajadoresGrid';
-import Footer from '../components/footer';
+import Jumbotron from '../components/Jumbotron.js';
+import AboutUs from '../components/AboutUs.js';
+import ServiceCard from '../components/ServiceCard.js';
+import CompanyPartnersCarousel from '../components/CompanyPartnersCarousel.js';
+import TrabajadoresGrid from '../components/TrabajadoresGrid.js';
 
 const HomePage = () => {
   return (
     <div>
-      <Navbar />
       <Jumbotron />
       <AboutUs />
       <section className="service-cards">
@@ -25,7 +22,6 @@ const HomePage = () => {
         <h2>Meet Our Featured Trabajadores!</h2>
         <TrabajadoresGrid />
       </section>
-      <Footer />
     </div>
   );
 };

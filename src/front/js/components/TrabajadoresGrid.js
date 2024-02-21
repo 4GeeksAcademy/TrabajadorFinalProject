@@ -2,7 +2,7 @@ import React from 'react';
 import TrabajadorCard from './TrabajadorCard';
 import '../../styles/TrabajadoresGrid.css';
 
-const TrabajadoresGrid = ({ trabajadores }) => {
+const TrabajadoresGrid = ({ trabajadores = [] }) => {
   return (
     <div className="trabajadores-grid">
       {trabajadores.map(trabajador => (

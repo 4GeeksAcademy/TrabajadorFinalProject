@@ -12,7 +12,7 @@ const Navbar = () => {
       <div className="container-fluid">
         {/* I need to find a way to right align the navbar links */}
         <ul className="navbar-nav">
-          <li className="nav-item"><Link className="nav-link" to="/home">Home</Link></li>
+          <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
           <li className="nav-item"><Link className="nav-link" to="/about-us">About Us</Link></li>
           <li className="nav-item"><Link className="nav-link" to="/services">Services</Link></li>
           <li className="nav-item"><Link className="nav-link" to="/reviews">Reviews</Link></li>
