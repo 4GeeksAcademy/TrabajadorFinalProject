@@ -1,0 +1,20 @@
+.accordion-button {
+    background-color:#2288E6 ;
+    color: white;
+  
+}
+.accordion-button:not(.collapsed) {
+    color: white;
+    background-color:#2288E6 ;
+
+}
+.accordion-button:focus {
+   
+}
+.card {
+    margin-top: 15px;
+}
+.faqcontainer {
+    margin-bottom: 45px;
+    margin-top: 25px;
+}

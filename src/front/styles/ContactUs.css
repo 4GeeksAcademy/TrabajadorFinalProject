@@ -65,3 +65,16 @@
     font-size: 30px !important;
     padding: 10px 153px !important;
 }
+.faq {
+    text-align: center;
+    font-size: 40px;
+     
+}
+.faqbutton {
+    display: block;
+    margin: 20px auto;
+    font-size: 30px !important;
+    padding: 10px 153px !important;
+    border-radius: 0;
+    margin-bottom: 50px;
+}

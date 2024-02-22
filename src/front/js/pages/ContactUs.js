@@ -1,12 +1,18 @@
 // src/front/js/pages/ContactUs.js
 
-import React, { useState } from 'react';
-import { Container, Form, Button } from 'react-bootstrap'; // Import Container instead of Jumbotron
+import React, { useState, useRef } from 'react';
+import { Container, Form, Button, Accordion } from 'react-bootstrap'; // Import Container instead of Jumbotron
 import '../../styles/ContactUs.css';
-import { faEnvelope, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faUserCircle, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import FAQSection from '../components/FAQsection.js';
 
 function ContactUs() {
+  const faqSectionRef = useRef(null);
+
+  const scrollToFAQ = () => {
+    faqSectionRef.current.scrollIntoView({ behavior: 'smooth' });
+  };
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -21,7 +27,9 @@ function ContactUs() {
     e.preventDefault();
     console.log(formData); // You can handle form submission here, for now, just log the form data.
   };
+
   
+
   const placeholderImageUrl = "https://via.placeholder.com/300x400";
   return (
     <div>
@@ -84,7 +92,18 @@ function ContactUs() {
                 </div>
             </div>
       </Container>
+      <Button variant="secondary" onClick={scrollToFAQ} className="faqbutton">
+        Go to FAQ <FontAwesomeIcon icon={faArrowDown} />
+      </Button>
+
+      {/* Add this ref to the FAQ section */}
+      <div ref={faqSectionRef} className="mt-5">
+        <h2 className='faq'>Frequently Asked Questions:</h2>
+        
+      </div>
+      <FAQSection/>
     </div>
+    
   );
 }
 
