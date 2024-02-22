@@ -1,7 +1,5 @@
-/* Navbar.css */
-
 .navbar {
-    background-color: #FFFFFF;
+    background-color: var(--background-color);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -9,20 +7,47 @@
     height: 60px;
 }
 
+.nav-link .fa-user {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: var(--fourth-color);
+    color: var(--background-color);
+    font-size: 15px;
+}
+
+.nav-link .fa-user:hover {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+}
+
 .navbar-nav .nav-item .nav-link {
-    color: #1F303B;
+    display: flex;
+    align-items: center;
+    color: var(--secondary-color);
     font-weight: 500;
     padding: 0.75em 1em;
 }
 
 .navbar-nav .nav-item .nav-link:hover {
-    color: #0F9AD7;
+    color: var(--primary-color);
 }
 
 .navbar-nav .nav-item.active .nav-link,
 .navbar-nav .nav-item .nav-link.active {
-    color: #0F9AD7;
-    border-bottom: 2px solid #0F9AD7;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.fa-user {
+    color: var(--fourth-color);
+}
+
+.fa-user:hover {
+    color: var(--primary-color);
 }
 
 @media (max-width: 991px) {

@@ -5,19 +5,27 @@ import logo from '../../img/Trabajador.com_Logo.png';
 
 const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white">
+    <nav className="navbar navbar-expand-lg ps-2">
       <Link className="navbar-brand" to="/">
         <img src={logo} alt="Trabajador Logo" />
       </Link>
       <div className="container-fluid">
         {/* I need to find a way to right align the navbar links */}
-        <ul className="navbar-nav">
-          <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
-          <li className="nav-item"><Link className="nav-link" to="/about-us">About Us</Link></li>
-          <li className="nav-item"><Link className="nav-link" to="/services">Services</Link></li>
-          <li className="nav-item"><Link className="nav-link" to="/reviews">Reviews</Link></li>
-          <li className="nav-item"><Link className="nav-link" to="/contact-us">Contact Us</Link></li>
-        </ul>
+        <div className='container-fluid'>
+          <ul className="navbar-nav justify-content-end pe-2">
+            <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
+            <li className="nav-item"><Link className="nav-link" to="/about-us">About Us</Link></li>
+            <li className="nav-item"><Link className="nav-link" to="/services">Services</Link></li>
+            <li className="nav-item"><Link className="nav-link" to="/reviews">Reviews</Link></li>
+            <li className="nav-item"><Link className="nav-link" to="/contact-us">Contact Us</Link></li>
+            <li>
+              <Link className="nav-link" to="/login">
+                <i class="fa-solid fa-user"></i>
+              </Link>
+            </li>
+          </ul>
+        </div>
+
       </div>
     </nav>
   );

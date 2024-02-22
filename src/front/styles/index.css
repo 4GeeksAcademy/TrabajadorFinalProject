@@ -1,5 +1,16 @@
 :root {
-    --primary-color: #0F9AD7;
-    --secondary-color: ;
-}
+    /* Color #1 | Background color of all pages, plus titles and text when background is #2 & #3. */
+    --background-color: #ffffff;
 
+    /* Color #2 | Background color for jumbotrons, certain containers, and primary buttons. */
+    --primary-color: #0F9AD7;
+
+    /* Color #3 | Color for titles, text, and secondary buttons. &  */
+    --secondary-color: #1F303B;
+
+    /* Color #4 | Shaded light-gray color for shapes that need to stand out from background – Boxes, circles, shaded logos, containers, etc. */
+    --third-color: #E4E7E8;
+
+    /* Color #5 | Used for outlines, borders, accentuate buttons, etc. */
+    --fourth-color: #0A1822;
+}
