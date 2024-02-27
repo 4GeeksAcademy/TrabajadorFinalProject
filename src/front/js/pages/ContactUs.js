@@ -11,7 +11,10 @@ function ContactUs() {
   const faqSectionRef = useRef(null);
 
   const scrollToFAQ = () => {
-    faqSectionRef.current.scrollIntoView({ behavior: 'smooth' });
+    window.scrollTo({
+      top: faqSectionRef.current.offsetTop,
+      behavior: 'smooth'
+    });
   };
   const [formData, setFormData] = useState({
     name: '',
