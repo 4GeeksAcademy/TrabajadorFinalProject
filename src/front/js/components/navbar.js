@@ -10,7 +10,6 @@ const Navbar = () => {
         <img src={logo} alt="Trabajador Logo" />
       </Link>
       <div className="container-fluid">
-        {/* I need to find a way to right align the navbar links */}
         <div className='container-fluid'>
           <ul className="navbar-nav justify-content-end pe-2">
             <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
@@ -20,12 +19,11 @@ const Navbar = () => {
             <li className="nav-item"><Link className="nav-link" to="/contact-us">Contact Us</Link></li>
             <li>
               <Link className="nav-link" to="/login">
-                <i class="fa-solid fa-user"></i>
+                <i className="fa-solid fa-user"></i>
               </Link>
             </li>
           </ul>
         </div>
-
       </div>
     </nav>
   );

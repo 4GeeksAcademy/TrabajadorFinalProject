@@ -1,0 +1,85 @@
+.carousel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--background-color);
+}
+
+.carousel .carousel-control {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 2em;
+    color: var(--primary-color);
+}
+
+.carousel .cards-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+    overflow: hidden;
+}
+
+.carousel .card {
+    border: 1px solid var(--fourth-color);
+    flex: 0 0 auto;
+    width: 230px;
+    margin: 0 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.carousel .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--fourth-color);
+}
+
+.carousel .card-title,
+.carousel .card-text {
+    color: var(--secondary-color);
+}
+
+.carousel .btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--background-color);
+}
+
+.carousel .btn-primary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.carousel .find-more-btn {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.carousel .find-more-btn:hover {
+    background-color: darken(var(--primary-color), 10%);
+}
+
+@media (max-width: 768px) {
+    .carousel .cards-container {
+        flex-direction: column;
+    }
+
+    .carousel .card {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .carousel .carousel-control {
+        display: none;
+    }
+}

@@ -1,0 +1,76 @@
+.card {
+    background-color: var(--background-color);
+    border: 1px solid var(--fourth-color);
+    margin: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 15px;
+    color: var(--secondary-color);
+}
+
+.card-title {
+    font-size: 1.25rem;
+    color: var(--secondary-color);
+    margin-bottom: .75rem;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--background-color);
+    padding: 10px 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.carousel-control.left,
+.carousel-control.right {
+    background: none;
+    border: none;
+    color: var(--secondary-color);
+    cursor: pointer;
+}
+
+.carousel-control.left:hover,
+.carousel-control.right:hover {
+    color: darken(var(--secondary-color), 10%);
+}
+
+@media (max-width: 768px) {
+    .card {
+        margin: 5px;
+    }
+
+    .card-body {
+        padding: 10px;
+    }
+
+    .btn-primary {
+        padding: 8px 16px;
+    }
+}
