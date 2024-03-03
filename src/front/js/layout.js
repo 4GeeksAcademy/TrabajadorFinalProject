@@ -10,7 +10,7 @@ import ServicesPage from "./pages/ServicesPage";
 import injectContext from "./store/appContext";
 import ContactUs from "./pages/ContactUs";
 import '../styles/AboutUs.css';
-import AboutUs from "./components/AboutUs";
+import AboutUs from "./pages/AboutUs";
 import ReviewPage from "./pages/Reviews"
 
 // Create your first component
@@ -31,7 +31,7 @@ const Layout = () => {
                     <Route path="/services" element={<ServicesPage />} />
                     <Route path="/contact-us" element={<ContactUs />} />
                     <Route path="*" element={<h1>Not found!</h1>} />
-                    <Route path="/reviews" element={<ReviewPage />}/>
+                    <Route path="/reviews" element={<ReviewPage />} />
                 </Routes>
                 <Footer />
             </ScrollToTop>

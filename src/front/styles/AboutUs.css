@@ -1,26 +1,25 @@
 .about-us-section {
-    background: url('../img/rigo-baby.jpg') no-repeat center center;
-    background-size: cover;
     color: var(--secondary-color);
-    padding: 4rem 2rem;
+    padding: 0;
     text-align: center;
+    margin-bottom: 70px;
 }
 
 .about-us-content h1 {
     margin-bottom: 0.5rem;
     font-size: 2.5rem;
-    color: var(--background-color);
+    color: black;
 }
 
 .about-us-content h2 {
     margin-bottom: 1rem;
     font-size: 1.5rem;
-    color: var(--background-color);
+    color: rgb(255, 255, 255);
 }
 
 .about-us-content p {
     margin-bottom: 2rem;
-    color: var(--background-color);
+    color: black;
 }
 
 .about-us-btn {
@@ -38,4 +37,53 @@
     background-color: var(--background-color);
     color: var(--primary-color);
 
+}
+.container {
+    width: 900px;
+}
+.AboutUsPath {
+    display: flex;
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+.AboutUsPathFlipped {
+    display: flex;
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+.AboutUsImg {
+    width: 200px;
+    height: auto;
+}
+.AboutUsImg1 {
+    width: auto;
+    height: 150px;
+}
+.AboutUsImgTeam {
+    
+    height: 140px;
+}
+.AboutUsPath p {
+    font-size: 25px;
+    background-color: #2288E6;
+    padding: 10px !important;
+    height: 130px;
+    color: white;
+    border-radius: 8px;
+    margin-top: 40px;
+    margin-right: auto;
+}
+.AboutUsPathFlipped p {
+    font-size: 25px;
+    background-color: #2288E6;
+    padding: 10px !important;
+    height: 130px;
+    color: white;
+    border-radius: 8px;
+    margin-top: 20px;
+    margin-left: auto;
 }

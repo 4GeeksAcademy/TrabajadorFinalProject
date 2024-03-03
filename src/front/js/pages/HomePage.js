@@ -1,6 +1,6 @@
 import React from 'react';
 import Jumbotron from '../components/Jumbotron.js';
-import AboutUs from '../components/AboutUs.js';
+import AboutUs from './AboutUs.js';
 import Carousel from '../components/Carousel.js'
 import ServicesOffered from '../components/ServicesOffered.js'
 import CompanyPartnersCarousel from '../components/CompanyPartnersCarousel.js';
