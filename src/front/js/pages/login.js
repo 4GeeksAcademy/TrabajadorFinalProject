@@ -1,92 +1,51 @@
-import React, { useState } from 'react';
+import '../../styles/Login.css';
 
-const Login = () => {
-  const [loginUsername, setLoginUsername] = useState('');
-  const [loginPassword, setLoginPassword] = useState('');
-  const [message, setMessage] = useState('');
+import React, { useContext, useState } from 'react';
+import { Context } from "../store/appContext";
+// import { useHistory } from "react-router";
 
-  // CSS styles embedded in JavaScript using template literals
-  const styles = `
-    .container {
-      display: flex;
-      justify-content: space-around;
-      margin-top: 50px;
-    }
-  
-    .login {
-      width: 300px;
-      padding: 20px;
-      border-radius: 10px;
-      background-color: #ffffff;
-    }
-  
-    h2 {
-      color: #012135;
-    }
-  
-    input {
-      width: 100%;
-      margin-bottom: 10px;
-      padding: 8px;
-      border: 1px solid #012135;
-      border-radius: 5px;
-    }
-  
-    button {
-      width: 100%;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      background-color: #00aeef;
-      color: #ffffff;
-      cursor: pointer;
-    }
-  
-    .message {
-      color: #ff0000;
-      text-align: center;
-    }
-  `;
 
-  const handleLogin = async () => {
-    try {
-      const response = await fetch('/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username: loginUsername, password: loginPassword }),
-      });
-      const data = await response.json();
-      if (response.ok) {
-        setMessage(data.message);
-      } else {
-        // Handle error response
-        setMessage('Login failed. Please try again.');
-      }
-    } catch (error) {
-      // Handle network or other errors
-      console.error('Error:', error);
-      setMessage('An error occurred. Please try again later.');
-    }
+
+export const Login = () => {
+  const { store, actions } = useContext(Context);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  // const history = useHistory();
+  const token = sessionStorage.getItem("token");
+  console.log("This is your token", token)
+
+
+  const handleClick = () => {
+    actions.login(email, password).then(() => {
+      history.push("/login")
+    })
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      {/* Apply styles using inline style attribute */}
-      <style>{styles}</style>
-      
-      <div className="container">
-        <div className="login">
-          <h2>Login</h2>
-          <input type="text" placeholder="Username" value={loginUsername} onChange={(e) => setLoginUsername(e.target.value)} />
-          <input type="password" placeholder="Password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
-          <button onClick={handleLogin}>Login</button>
-        </div>
-        {message && <p className="message">{message}</p>}
+    <div className="container">
+      <div className="login">
+        <h2>Login</h2>
+        {(token && token != "" && token != undefined) ? "You are logged in with this token" + token :
+
+          <div>
+            <input
+              type="text"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)} />
+            <input
+              type="password"
+              placeholder="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button onClick={handleClick}>Login</button>
+          </div>
+
+          // {message && <p className="message">{setMessage}</p>}
+        }
       </div>
     </div>
-  );
-};
-
+  )
+}
 export default Login;
