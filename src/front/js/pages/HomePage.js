@@ -1,6 +1,6 @@
 import React from 'react';
 import Jumbotron from '../components/Jumbotron.js';
-import AboutUs from './AboutUs.js';
+import AboutUsSection from '../components/AboutUsSection.js';
 import Carousel from '../components/Carousel.js'
 import ServicesOffered from '../components/ServicesOffered.js'
 import CompanyPartnersCarousel from '../components/CompanyPartnersCarousel.js';
@@ -10,7 +10,7 @@ const HomePage = () => {
   return (
     <div>
       <Jumbotron />
-      <AboutUs />
+      <AboutUsSection />
       <section className="meet-trabajadores">
         <h2>Meet Our Featured Trabajadores!</h2>
         <Carousel />
