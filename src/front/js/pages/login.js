@@ -2,7 +2,7 @@ import '../../styles/Login.css';
 
 import React, { useContext, useState } from 'react';
 import { Context } from "../store/appContext";
-// import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -10,14 +10,14 @@ export const Login = () => {
   const { store, actions } = useContext(Context);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const history = useHistory();
+  const navigate = useNavigate();
   const token = sessionStorage.getItem("token");
   console.log("This is your token", token)
 
 
   const handleClick = () => {
     actions.login(email, password).then(() => {
-      history.push("/login")
+      navigate("/login")
     })
   };
 
