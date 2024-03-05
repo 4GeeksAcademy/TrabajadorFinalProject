@@ -35,7 +35,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 
 				try {
-					const resp = await fetch(process.env.BACKEND_URL + '/api/token/', opts)
+					const resp = await fetch('https://fictional-space-couscous-5ggrg5rq9wx34p4v-3001.app.github.dev/api/token/', opts)
 					if (resp.status === 200) {
 						alert("there has been an error");
 						return false;
