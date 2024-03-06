@@ -1,72 +1,61 @@
-
+/* SignUp.module.css */
 
 :local .container {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items horizontally */
   margin-top: 50px;
 }
 
-
-:local .login {
+:local .signup {
   width: 300px;
   padding: 30px;
   border-radius: 5px;
   background-color: #ffffff;
-  /* border: 1px solid black; */
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Adjust the values as needed */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 50px;
-  
+  text-align: center; /* Center text horizontally */
 }
 
-
-:local h2 {
-  color: #012135;
-  margin-bottom: 18px;
-}
-
-
-:local .input {
-  width: 100%;
-  margin-bottom: 20px;
+:local .signup input {
+  width: calc(100% - 40px); /* Adjust input width */
+  margin-bottom: 10px;
   padding: 8px;
   border: 1px solid #012135;
-  border-radius: 2px;
+  border-radius: 5px;
 }
 
-
-:local .button {
-  width: 100%;
+:local .signup button {
+  width: calc(100% - 40px); /* Adjust button width */
   padding: 10px;
   border: none;
   border-radius: 5px;
   background-color: #00aeef;
   color: #ffffff;
   cursor: pointer;
-  margin-bottom: 10px;
+}
+
+:local .signupText {
+  color: #012135;
+  margin-top: 20px;
+  text-align: center;
 }
 
 
 :local .message {
-  color: #ff0000;
+  color: red; /* Make the message red */
   text-align: center;
 }
-.SignUp {
-  display: flex;
-}
-.Register {
 
-  color: #0d6efd;
-  margin-left : 4px;
-}
+
 :local .inputGroup {
   display: flex;
-  align-items: center;;
+  align-items: center;
   margin-bottom: 10px; /* Add margin between input groups */
- 
 }
+
 :local .icon {
   margin-right: 10px; /* Add margin between icon and input box */
-  margin-bottom: 15px;
 }
 :local .iconMail {
   margin-right: 8px; /* Add margin between icon and input box */
