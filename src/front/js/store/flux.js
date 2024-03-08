@@ -34,22 +34,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 				};
 
-				try {
 					const resp = await fetch(process.env.BACKEND_URL + '/api/token/', opts)
-					if (resp.status === 200) {
-						alert("there has been an error");
-						return false;
-					}
 
 					const data = await resp.json();
 					console.log("this came from the backend", data);
 					sessionStorage.setItem("token", data.acces_token);
 					setStore({ token: data.access_token })
 					return true;
-				}
-			catch(error){
-				console.error("There has been an error with login.")
-			}	
 		},
 
 		getMessage: async () => {
