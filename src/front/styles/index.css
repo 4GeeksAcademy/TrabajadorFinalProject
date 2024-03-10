@@ -14,3 +14,94 @@
     /* Color #5 | Used for outlines, borders, accentuate buttons, etc. */
     --fourth-color: #0A1822;
 }
+
+/* Primary Button – Sky Blue */
+.button-62-primary {
+    background: var(--background-color);
+    border: 0;
+    border-radius: 12px;
+    color: var(--primary-color);
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 2.5;
+    outline: transparent;
+    padding: 0 1rem;
+    text-align: center;
+    text-decoration: none;
+    transition: box-shadow .2s ease-in-out;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+}
+
+.button-62-primary:not([disabled]):focus,
+.button-62-primary:not([disabled]):hover {
+    box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.3), 0 0 1rem var(--secondary-color);
+    background-color: var(--primary-color);
+    color: var(--background-color);
+}
+
+/* Secondary Button – Gray/Blue */
+.button-62-secondary {
+    background: var(--secondary-color);
+    border: 0;
+    border-radius: 12px;
+    color: var(--background-color);
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 2.5;
+    outline: transparent;
+    padding: 0 1rem;
+    text-align: center;
+    text-decoration: none;
+    transition: box-shadow .2s ease-in-out;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+}
+
+.button-62-secondary:not([disabled]):focus,
+.button-62-secondary:not([disabled]):hover {
+    box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.3), 0 0 1rem var(--secondary-color);
+    background-color: var(--primary-color);
+    color: var(--background-color);
+}
+
+
+/* Third Button – White Background */
+.button-62-third {
+    background: var(--primary-color);
+    border: 0;
+    border-radius: 12px;
+    color: var(--background-color);
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 2.5;
+    outline: transparent;
+    padding: 0 1rem;
+    text-align: center;
+    text-decoration: none;
+    transition: box-shadow .2s ease-in-out;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+}
+
+.button-62-third:not([disabled]):focus,
+.button-62-third:not([disabled]):hover {
+    box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.3), 0 0 1rem var(--secondary-color);
+    background-color: var(--primary-color);
+    color: var(--background-color);
+}

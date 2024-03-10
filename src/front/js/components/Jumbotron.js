@@ -11,16 +11,16 @@ const Jumbotron = () => {
         <source src={jumbotronVideo} type="video/mp4" />
       </video> */}
 
-      <div className="container ">
+      <div className="container-fluid p-5">
         <h1>Looking to hire top coding freelancers?</h1>
-        <h3>Our Trabajadores will:</h3>
+        <h3>Hire a Trabajadores to:</h3>
         <ul>
           <li>Tackle any coding challenge</li>
           <li>Provide free quotes</li>
           <li>Save up to 50% on your first request</li>
         </ul>
-        <button className="btn btn-primary">Hire a trabajador</button>
-        <button className="btn btn-secondary">Check out their work</button>
+        <button className="btn button-62 button-62-primary">Hire a trabajador</button>
+        <button className="btn button-62 button-62-secondary">Check out their work</button>
       </div>
     </div>
   );
