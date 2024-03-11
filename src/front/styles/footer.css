@@ -1,25 +1,95 @@
-footer {
+/* .footer {
+    background: linear-gradient(to bottom, var(--secondary-color) 85%, var(--primary-color) 15%);
+    color: var(--background-color);
+    padding: 3rem 0;
+    font-size: 0.9rem;
+} */
+
+.footer-container {
     background-color: var(--secondary-color);
+    color: var(--background-color);
+    padding: 4rem 0;
+    font-size: 0.9rem;
+}
+
+.footer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    flex-wrap: wrap;
+}
+
+.footer-col {
+    margin-bottom: 2rem;
+}
+
+.logo-col {
+    flex-basis: 20%;
+    min-width: 150px;
+}
+
+.footer-logo {
+    margin-bottom: 1rem;
+}
+
+.social-links a {
+    display: inline-block;
+    margin-right: 10px;
     color: var(--background-color);
 }
 
-footer a {
+.social-links a:hover {
     color: var(--primary-color);
 }
 
-footer a:hover {
-    color: var(--fourth-color);
-}
-
-footer h5 {
+.quick-links h5,
+.newsletter h5 {
     color: var(--background-color);
+    margin-bottom: 0.5rem;
 }
 
-.company-logo {
-    background-color: var(--third-color);
-    border: 1px solid var(--fourth-color);
+.quick-links a,
+.newsletter a {
+    display: block;
+    color: var(--background-color);
+    margin-bottom: 0.25rem;
+    text-decoration: none;
+}
+
+.quick-links a:hover,
+.newsletter a:hover {
+    text-decoration: underline;
+    color: var(--primary-color);
+}
+
+.newsletter {
+    flex-basis: 30%;
 }
 
 .tLogo {
-    background-color: transparent;
+    max-width: 300px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    padding: 10px 0;
+}
+
+
+@media (max-width: 768px) {
+    .footer-row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-col {
+        flex-basis: 100%;
+        max-width: 100%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .social-links {
+        margin-top: 1rem;
+    }
 }

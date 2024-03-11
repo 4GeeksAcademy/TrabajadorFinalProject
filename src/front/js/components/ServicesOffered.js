@@ -43,7 +43,9 @@ const ServicesOffered = () => {
                     ))}
                 </div>
             </div>
-            <button className="services-button text-center">Browse Our Services</button>
+            <div className="d-flex justify-content-center">
+                <button className="services-button">Browse Our Services</button>
+            </div>
         </div>
     );
 };

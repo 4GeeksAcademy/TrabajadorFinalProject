@@ -37,7 +37,7 @@ const Carousel = () => {
     }
 
     return (
-        <div className="carousel">
+        <div className="carousel d-flex justify-content-center">
             <button onClick={prevCards} className="carousel-control left"><i className="fa-solid fa-arrow-left"></i></button>
             <div className="cards-container">
                 {trabajadores.slice(currentIndex, currentIndex + 5).map((trabajador, index) => (

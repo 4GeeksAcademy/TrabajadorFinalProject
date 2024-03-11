@@ -15,6 +15,7 @@
     --fourth-color: #0A1822;
 }
 
+
 /* Primary Button – Sky Blue */
 .button-62-primary {
     background: var(--background-color);
@@ -24,7 +25,7 @@
     cursor: pointer;
     display: inline-block;
     font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 500;
     line-height: 2.5;
     outline: transparent;
@@ -45,6 +46,7 @@
     color: var(--background-color);
 }
 
+
 /* Secondary Button – Gray/Blue */
 .button-62-secondary {
     background: var(--secondary-color);
@@ -54,7 +56,7 @@
     cursor: pointer;
     display: inline-block;
     font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 500;
     line-height: 2.5;
     outline: transparent;
@@ -85,7 +87,7 @@
     cursor: pointer;
     display: inline-block;
     font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 500;
     line-height: 2.5;
     outline: transparent;
