@@ -11,7 +11,8 @@ import injectContext from "./store/appContext";
 import ContactUs from "./pages/ContactUs";
 import '../styles/AboutUs.css';
 import AboutUs from "./pages/AboutUs";
-import ReviewPage from "./pages/Reviews"
+import ReviewPage from "./pages/Reviews";
+import ProfilePopover from "./components/ProfilePopover";
 
 // Create your first component
 const Layout = () => {
@@ -32,6 +33,7 @@ const Layout = () => {
                     <Route path="/contact-us" element={<ContactUs />} />
                     <Route path="*" element={<h1>Not found!</h1>} />
                     <Route path="/reviews" element={<ReviewPage />} />
+                    <Route path="/user-profile" component={<ProfilePopover />} />
                 </Routes>
                 <Footer />
             </ScrollToTop>
