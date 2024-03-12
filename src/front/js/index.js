@@ -1,13 +1,14 @@
-//import react into the bundle
 import React from "react";
 import ReactDOM from "react-dom";
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import { CartProvider } from './components/CartContext.js';
 
-//include your index.scss file into the bundle
 import "../styles/index.css";
-
-//import your own components
 import Layout from "./layout";
 
-//render your react application
-ReactDOM.render(<Layout />, document.querySelector("#app"));
+// Render your react application with CartProvider wrapping the Layout component
+ReactDOM.render(
+  <CartProvider>
+    <Layout />
+  </CartProvider>,
+  document.querySelector("#app")
+);

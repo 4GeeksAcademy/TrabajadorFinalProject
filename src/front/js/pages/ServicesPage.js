@@ -1,27 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import axios from 'axios';
 import Filter from '../components/Filter';
 import SearchBar from '../components/SearchBar';
 import TrabajadoresGrid from '../components/TrabajadoresGrid';
-
+import { useCart } from '../components/CartContext.js';
 
 const ServicesPage = () => {
-  const [services, setServices] = useState([]);
-  const [filteredServices, setFilteredServices] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [typeFilter, setTypeFilter] = useState('');
-  const [budgetFilter, setBudgetFilter] = useState('');
-  const [ratingFilter, setRatingFilter] = useState(null);
-  const [deliveryTimeFilter, setDeliveryTimeFilter] = useState('');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [services, setServices] = React.useState([]);
+  const [filteredServices, setFilteredServices] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState(null);
+  const [typeFilter, setTypeFilter] = React.useState('');
+  const [searchTerm, setSearchTerm] = React.useState('');
+  const { addToCart } = useCart();
 
-  useEffect(() => {
+  React.useEffect(() => {
     setLoading(true);
     axios.get('https://cd91ae11-bbc9-4ce3-9d9e-ea3cf070f7fb.mock.pstmn.io/Trabajador')
       .then(response => {
-        setServices(response.data);
-        setFilteredServices(response.data);
+        const modifiedServices = response.data.map(service => ({
+          ...service,
+          name: `Service ${Math.floor(Math.random() * 100)}`,
+          provider: `Provider ${Math.floor(Math.random() * 20)}`,
+          price: Math.floor(Math.random() * 500), // Generate random price
+          type: ['Web Development', 'Data Analysis', 'Machine Learning'][Math.floor(Math.random() * 3)], // Randomly assign a coding service type
+        }));
+        setServices(modifiedServices);
+        setFilteredServices(modifiedServices);
         setLoading(false);
       })
       .catch(error => {
@@ -31,20 +36,21 @@ const ServicesPage = () => {
       });
   }, []);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const filtered = services.filter(service => {
       return (service.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         service.description.toLowerCase().includes(searchTerm.toLowerCase())) &&
-        (!typeFilter || service.type === typeFilter) &&
-        (!budgetFilter || service.budget === budgetFilter) &&
-        (!ratingFilter || service.rating === ratingFilter) &&
-        (!deliveryTimeFilter || service.deliveryTime === deliveryTimeFilter);
+        (!typeFilter || service.type === typeFilter);
     });
     setFilteredServices(filtered);
-  }, [typeFilter, budgetFilter, ratingFilter, deliveryTimeFilter, searchTerm, services]);
+  }, [typeFilter, searchTerm, services]);
 
   const handleSearch = (searchValue) => {
     setSearchTerm(searchValue);
+  };
+
+  const handleAddToCart = (service) => {
+    addToCart(service);
   };
 
   if (loading) return <div>Loading services...</div>;
@@ -52,11 +58,10 @@ const ServicesPage = () => {
 
   return (
     <div>
-      <h1>Our Services</h1>
+      <h1>Our Coding Services</h1>
       <SearchBar onSearch={handleSearch} />
-      <Filter label="Type" options={[{ label: "Web Development", value: "Web Development" }, { label: "Data Analysis", value: "Data Analysis" }]} onChange={(value) => setTypeFilter(value)} />
-      <Filter label="Budget" options={[{ label: "$20-$49", value: "$20-$49" }, { label: "$50-$99", value: "$50-$99" }]} onChange={(value) => setBudgetFilter(value)} />
-      <TrabajadoresGrid trabajadores={filteredServices} />
+      <Filter label="Type" options={[{ label: "Web Development", value: "Web Development" }, { label: "Data Analysis", value: "Data Analysis" }, { label: "Machine Learning", value: "Machine Learning" }]} onChange={(value) => setTypeFilter(value)} />
+      <TrabajadoresGrid trabajadores={filteredServices} onAddToCart={handleAddToCart} />
     </div>
   );
 };
