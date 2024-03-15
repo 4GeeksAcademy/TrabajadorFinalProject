@@ -5,7 +5,7 @@
 }
 
 .card-top-section {
-    background-image: url('https://xsgames.co/randomusers/avatar.php?g=female');
+    /* background-image: url('https://xsgames.co/randomusers/avatar.php?g=female'); */
     background-size: cover;
     padding: 1rem;
     border-top-left-radius: calc(0.25rem - 1px);

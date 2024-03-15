@@ -5,7 +5,7 @@ import logo from '../../img/Trabajador.com_Logo.png';
 
 const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg ps-2">
+    <nav className="navbar navbar-expand-lg ps-2 sticky-top">
       <Link className="navbar-brand" to="/">
         <img src={logo} alt="Trabajador Logo" />
       </Link>

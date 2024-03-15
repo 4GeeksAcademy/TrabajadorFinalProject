@@ -36,15 +36,15 @@ const ServicesOffered = () => {
         <div className="services-offered my-5">
             <h2 className='text-center'>Services Offered</h2>
             <p className='text-center'>Custom Web Solutions for Your Business Needs</p>
-            <div class="container text-center">
+            <div class="container-fluid px-4 text-center">
                 <div className="services-grid row">
                     {serviceData.map((service, index) => (
                         <ServiceItem key={index} icon={service.icon} label={service.label} />
                     ))}
                 </div>
             </div>
-            <div className="d-flex justify-content-center">
-                <button className="services-button">Browse Our Services</button>
+            <div className="d-flex justify-content-center mt-4">
+                <button className="btn button-62 button-62-primary">Browse Our Services</button>
             </div>
         </div>
     );
