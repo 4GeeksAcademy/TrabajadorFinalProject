@@ -36,8 +36,10 @@ const Jumbotron = () => {
           <li>Provide free quotes</li>
           <li>Save up to 50% on your first request</li>
         </ul>
-        <button className="btn button-62 button-62-primary">Hire a trabajador</button>
-        <button className="btn button-62 button-62-primary">Check out their work</button>
+        <div>
+          <button className="btn button-62 button-62-secondary">Hire a trabajador</button>
+          <button className="btn button-62 button-62-secondary">Check out their work</button>
+        </div>
       </div>
       <div className="carousel-triangle">
         {carouselImages.map((image, index) => (

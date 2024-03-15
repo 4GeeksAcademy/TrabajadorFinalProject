@@ -1,0 +1,43 @@
+.about-us-section {
+    padding: 50px 0;
+    /* Adds padding to the top and bottom of the section */
+    background-color: var(--background-color);
+    /* Sets the section's background color */
+}
+
+/* Styles for the text within the section */
+.text-section {
+    padding-right: 15px;
+    /* Adds padding to the right of the text section for spacing */
+}
+
+.text-section h2 {
+    color: var(--primary-color);
+    /* Sets the color of the heading */
+    margin-bottom: 20px;
+    /* Creates space below the heading */
+    /* Add any additional styling for the heading such as font-size, line-height, etc. */
+}
+
+.text-section p {
+    color: var(--secondary-color);
+    /* Sets the color of the paragraph text */
+    margin-bottom: 20px;
+    /* Creates space below the paragraph */
+    /* Add any additional styling for the paragraph such as font-size, line-height, etc. */
+}
+
+/* Styles for the image section */
+.image-section img {
+    border-radius: 10px;
+    /* Rounded corners for the image */
+    /* Bootstrap's img-fluid class takes care of width and height */
+}
+
+/* Ensures that the text and image stack on smaller screens */
+@media (max-width: 991px) {
+    .text-section {
+        padding-right: 0;
+        /* Removes padding to the right on smaller screens */
+    }
+}

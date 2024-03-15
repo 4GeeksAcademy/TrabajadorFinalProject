@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../img/Trabajador.com_Logo.png';
+import logo from '../../img/Trabajador.com_Logo_Footer.png';
 import '../../styles/footer.css';
 
 const Footer = () => {
@@ -9,7 +9,7 @@ const Footer = () => {
       <div className="footer-row">
         <div className="footer-col logo-col">
           <img src={logo} alt="Trabajador Logo" className="footer-logo tLogo" />
-          <p>© 2024 Trabajador.com</p>
+          <p className='copyright-year'>©2024 Trabajador.com</p>
           {/* Social media icons */}
           <div className="social-links">
             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a>
