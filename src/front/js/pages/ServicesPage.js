@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Card } from '../components/Card';
 import Select from 'react-select';
 import '../../styles/ServicesPage.css';
 import TrabajadoresGrid from '../components/TrabajadoresGrid';
@@ -8,6 +7,7 @@ import TrabajadoresGrid from '../components/TrabajadoresGrid';
 const ServicesPage = () => {
   const [vendors, setVendors] = useState([]);
   const [filteredVendors, setFilteredVendors] = useState([]);
+  // State for filters
   const [selectedServices, setSelectedServices] = useState([]);
   const [selectedPrice, setSelectedPrice] = useState('');
   const [selectedDeliveryTime, setSelectedDeliveryTime] = useState('');

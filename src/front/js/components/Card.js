@@ -3,10 +3,7 @@ import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import '../../styles/Card.css';
 
-const Card = ({
-  trabajador,
-  onAddToCart
-}) => {
+const Card = ({ trabajador, onAddToCart }) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleClose = () => setShowModal(false);
@@ -23,11 +20,13 @@ const Card = ({
 
   return (
     <>
-      <div className={`card ${trabajador.isTopRated ? 'top-rated-card' : ''}`}>
-        {trabajador.isTopRated && <div className="top-rated-banner">Top Rated</div>}
+      <div className={`card ${isHighRated ? 'top-rated-card' : ''}`}>
+        {isHighRated && (
+          <div className="top-rated-banner">Top Rated</div>
+        )}
         <div className="card-rating">
           {isHighRated && Array.from({ length: 5 }, (_, index) => (
-            <i key={index} className="fa-solid fa-star"></i>
+            <i key={index} className="fa-solid fa-star"></i> // FontAwesome class
           ))}
         </div>
         <img src={imageSrc} className="card-img-top" alt={trabajador.name} />

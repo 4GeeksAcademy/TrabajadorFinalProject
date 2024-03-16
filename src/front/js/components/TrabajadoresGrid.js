@@ -1,11 +1,12 @@
 import React from 'react';
-import Card from './Card';
+import Card from '../components/Card';
 import '../../styles/TrabajadoresGrid.css';
 
 const TrabajadoresGrid = ({ trabajadores, onAddToCart }) => {
+
   return (
     <div className="trabajadores-grid">
-      {trabajadores.map((trabajador) => (
+      {trabajadores.map(trabajador => (
         <Card
           key={trabajador.id}
           trabajador={trabajador}
