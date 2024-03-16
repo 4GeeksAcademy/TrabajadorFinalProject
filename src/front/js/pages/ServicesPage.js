@@ -1,67 +1,96 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Filter from '../components/Filter';
-import SearchBar from '../components/SearchBar';
+import { Card } from '../components/Card';
+import Select from 'react-select';
+import '../../styles/ServicesPage.css';
 import TrabajadoresGrid from '../components/TrabajadoresGrid';
-import { useCart } from '../components/CartContext.js';
 
 const ServicesPage = () => {
-  const [services, setServices] = React.useState([]);
-  const [filteredServices, setFilteredServices] = React.useState([]);
-  const [loading, setLoading] = React.useState(true);
-  const [error, setError] = React.useState(null);
-  const [typeFilter, setTypeFilter] = React.useState('');
-  const [searchTerm, setSearchTerm] = React.useState('');
-  const { addToCart } = useCart();
+  const [vendors, setVendors] = useState([]);
+  const [filteredVendors, setFilteredVendors] = useState([]);
+  const [selectedServices, setSelectedServices] = useState([]);
+  const [selectedPrice, setSelectedPrice] = useState('');
+  const [selectedDeliveryTime, setSelectedDeliveryTime] = useState('');
+  const [isTopRated, setIsTopRated] = useState(false);
 
-  React.useEffect(() => {
-    setLoading(true);
-    axios.get('https://cd91ae11-bbc9-4ce3-9d9e-ea3cf070f7fb.mock.pstmn.io/Trabajador')
-      .then(response => {
-        const modifiedServices = response.data.map(service => ({
-          ...service,
-          name: `Service ${Math.floor(Math.random() * 100)}`,
-          provider: `Provider ${Math.floor(Math.random() * 20)}`,
-          price: Math.floor(Math.random() * 500), // Generate random price
-          type: ['Web Development', 'Data Analysis', 'Machine Learning'][Math.floor(Math.random() * 3)], // Randomly assign a coding service type
-        }));
-        setServices(modifiedServices);
-        setFilteredServices(modifiedServices);
-        setLoading(false);
-      })
-      .catch(error => {
-        console.error('Error fetching services:', error);
-        setError(error);
-        setLoading(false);
-      });
+  // Filters:
+  const serviceOptions = [
+    { value: 'Machine Learning and AI Development', label: 'Machine Learning and AI Development' },
+    { value: 'Database Management', label: 'Database Management' }
+  ];
+  const priceOptions = [
+    { value: '$50 to $99', label: '$50 to $99' }
+  ];
+  const deliveryTimeOptions = [
+    { value: 'ASAP (Within 24 Hours)', label: 'ASAP (Within 24 Hours)' }
+  ];
+
+
+  useEffect(() => {
+    // Fetch vendors from the API
+    const fetchData = async () => {
+      try {
+        const response = await axios(process.env.BACKEND_URL + "/api/vendors");
+        setVendors(response.data);
+        setFilteredVendors(response.data);
+      } catch (error) {
+        console.error('Error fetching vendors:', error);
+      }
+    };
+
+    fetchData();
   }, []);
 
-  React.useEffect(() => {
-    const filtered = services.filter(service => {
-      return (service.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        service.description.toLowerCase().includes(searchTerm.toLowerCase())) &&
-        (!typeFilter || service.type === typeFilter);
-    });
-    setFilteredServices(filtered);
-  }, [typeFilter, searchTerm, services]);
 
-  const handleSearch = (searchValue) => {
-    setSearchTerm(searchValue);
+  useEffect(() => {
+    // Filter vendors based on selected criteria
+    const applyFilters = () => {
+      let filtered = vendors.filter(vendor => {
+        const servicesMatch = selectedServices.length ? selectedServices.some(service => vendor.services.includes(service.value)) : true;
+        const priceMatch = selectedPrice ? vendor.price === selectedPrice.value : true;
+        const deliveryTimeMatch = selectedDeliveryTime ? vendor.delivery_time === selectedDeliveryTime.value : true;
+        const topRatedMatch = isTopRated ? vendor.top_rated : true;
+        return servicesMatch && priceMatch && deliveryTimeMatch && topRatedMatch;
+      });
+      setFilteredVendors(filtered);
+    };
+
+    applyFilters();
+  }, [selectedServices, selectedPrice, selectedDeliveryTime, isTopRated, vendors]);
+
+  const handleAddToCart = (vendor) => {
+    console.log('Add to cart:', vendor);
   };
-
-  const handleAddToCart = (service) => {
-    addToCart(service);
-  };
-
-  if (loading) return <div>Loading services...</div>;
-  if (error) return <div>Error loading services.</div>;
 
   return (
     <div>
-      <h1>Our Coding Services</h1>
-      <SearchBar onSearch={handleSearch} />
-      <Filter label="Type" options={[{ label: "Web Development", value: "Web Development" }, { label: "Data Analysis", value: "Data Analysis" }, { label: "Machine Learning", value: "Machine Learning" }]} onChange={(value) => setTypeFilter(value)} />
-      <TrabajadoresGrid trabajadores={filteredServices} onAddToCart={handleAddToCart} />
+      <Select
+        options={serviceOptions}
+        onChange={setSelectedServices}
+        isMulti
+        placeholder="Filter by Services"
+      />
+      <Select
+        options={priceOptions}
+        onChange={(option) => setSelectedPrice(option)}
+        placeholder="Filter by Price"
+      />
+      <Select
+        options={deliveryTimeOptions}
+        onChange={(option) => setSelectedDeliveryTime(option)}
+        placeholder="Filter by Delivery Time"
+      />
+      <div>
+        <input
+          type="checkbox"
+          checked={isTopRated}
+          onChange={(e) => setIsTopRated(e.target.checked)}
+        /> Top Rated Only
+      </div>
+      <TrabajadoresGrid
+        trabajadores={filteredVendors}
+        onAddToCart={handleAddToCart}
+      />
     </div>
   );
 };
