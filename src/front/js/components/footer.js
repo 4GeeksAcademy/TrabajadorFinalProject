@@ -5,7 +5,7 @@ import '../../styles/footer.css';
 
 const Footer = () => {
   return (
-    <footer className="footer-container container-fluid p-5">
+    <footer className="footer-container container-fluid p-5 text-center">
       <div className="footer-row">
         <div className="footer-col logo-col">
           <img src={logo} alt="Trabajador Logo" className="footer-logo tLogo" />
