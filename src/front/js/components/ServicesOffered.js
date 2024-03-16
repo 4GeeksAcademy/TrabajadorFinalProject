@@ -36,7 +36,7 @@ const ServicesOffered = () => {
         <div className="services-offered my-5">
             <h2 className='text-center'>Services Offered</h2>
             <p className='text-center'>Custom Web Solutions for Your Business Needs</p>
-            <div class="container-fluid px-4 text-center">
+            <div className="container-fluid px-4 text-center">
                 <div className="services-grid row">
                     {serviceData.map((service, index) => (
                         <ServiceItem key={index} icon={service.icon} label={service.label} />
