@@ -8,6 +8,7 @@ import axios from 'axios';
 const ServicesPage = () => {
   // State for storing the list of trabajadores
   const [vendors, setVendors] = useState([]);
+  const [cart, setCart] = useState([]);
 
   // State for any filters you might want to apply
   const [filters, setFilters] = useState({/* initial filters state */ });
@@ -28,24 +29,24 @@ const ServicesPage = () => {
   }, []); // Dependency array is empty to run only on component mount
 
 
-  // // Handler to update filters based on user input
-  // const handleFilterChange = (newFilter) => {
-  //   setFilters(prevFilters => ({
-  //     ...prevFilters,
-  //     ...newFilter,
-  //   }));
-  // };
+  // Add to Cart functionality
+  const handleAddToCart = (vendorToAdd) => {
+    setCart(currentCart => {
+      // Check if the vendor is already in the cart
+      const isVendorInCart = currentCart.some(vendor => vendor.id === vendorToAdd.id);
 
-  // // Function to apply filters to the trabajadores list
-  // const filteredTrabajadores = trabajadores.filter(trabajador => {
-  //   // Implement filtering logic based on the current state of filters
-  //   // This is placeholder logic, replace with your actual filtering criteria
-  //   return true;
-  // });
+      if (!isVendorInCart) {
+        // If not, add the vendor to the cart with a quantity of 1
+        return [...currentCart, { ...vendorToAdd, quantity: 1 }];
+      } else {
+        // If yes, update the quantity of that vendor
+        return currentCart.map(vendor =>
+          vendor.id === vendorToAdd.id ? { ...vendor, quantity: vendor.quantity + 1 } : vendor
+        );
+      }
+    });
 
-
-  const handleAddToCart = (vendor) => {
-    console.log('Add to cart:', vendor);
+    console.log('Added to cart:', vendorToAdd);
   };
 
   return (
