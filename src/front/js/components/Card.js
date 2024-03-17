@@ -7,7 +7,8 @@ const Card = ({ trabajador, onAddToCart }) => {
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
-  const isHighRated = trabajador.highRated;
+  // const isHighRated = trabajador.highRated;
+  const isHighRated = trabajador.top_rated;
 
   const handleAddToCart = () => {
     onAddToCart(trabajador);

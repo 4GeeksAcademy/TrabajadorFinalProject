@@ -38,18 +38,22 @@ const Carousel = () => {
 
     return (
         <div className="carousel d-flex justify-content-center">
-            <button onClick={prevCards} className="carousel-control left"><i className="fa-solid fa-arrow-left"></i></button>
-            <div className="cards-container">
-                {trabajadores.slice(currentIndex, currentIndex + 5).map((trabajador, index) => (
-                    <Card
-                        key={trabajador.id}
-                        title={trabajador.name}
-                        description={trabajador.description}
-                        gender={index % 2 === 0 ? 'male' : 'female'}
-                    />
-                ))}
+            <h2 className='text-center'>Meet Our Featured Trabajadores!</h2>
+            <p className='text-center'>These Trabajadores Have Received High Reviews</p>
+            <div className='container-fluid d-flex justify-content-center'>
+                <button onClick={prevCards} className="carousel-control left"><i className="fa-solid fa-arrow-left"></i></button>
+                <div className="cards-container">
+                    {trabajadores.slice(currentIndex, currentIndex + 5).map((trabajador, index) => (
+                        <Card
+                            key={trabajador.id}
+                            title={trabajador.name}
+                            description={trabajador.description}
+                            gender={index % 2 === 0 ? 'male' : 'female'}
+                        />
+                    ))}
+                </div>
+                <button onClick={nextCards} className="carousel-control right"><i className="fa-solid fa-arrow-right"></i></button>
             </div>
-            <button onClick={nextCards} className="carousel-control right"><i className="fa-solid fa-arrow-right"></i></button>
         </div>
     );
 };

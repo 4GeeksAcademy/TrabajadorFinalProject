@@ -11,11 +11,9 @@ const HomePage = () => {
     <div>
       <Jumbotron />
       <section className="meet-trabajadores m-5">
-        <h2 className='d-flex justify-content-center'>About Us</h2>
         <AboutUsSection />
       </section>
       <section className="meet-trabajadores m-5">
-        <h2 className='d-flex justify-content-center'>Meet Our Featured Trabajadores!</h2>
         <Carousel />
       </section>
       <section className="service-icons m-5">
