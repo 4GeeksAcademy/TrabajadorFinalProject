@@ -6,7 +6,7 @@ const AboutUsSection = () => {
     return (
         <div className="about-us-section">
             <h2 className='text-center'>About Us</h2>
-            <p className='text-center'>Empower Your Vision: Let Trabajadores Craft Your Future!</p>
+            <p className='text-center'>Empower Your Vision: Let Our Trabajadores Craft Your Future!</p>
             <div className='container-fluid about-us-section-container mt-3'>
                 <div className="row text-start">
                     <div className="col-md-6 text-section p-5">
