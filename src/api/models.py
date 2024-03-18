@@ -25,8 +25,6 @@ class User(db.Model):
         }
 
 # Vendor – Cards & Services Page
-
-
 api = Blueprint('api', __name__)
 CORS(api)
 

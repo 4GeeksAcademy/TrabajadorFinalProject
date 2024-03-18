@@ -4,12 +4,8 @@
     margin-bottom: 2rem;
     background-color: var(--primary-color);
     color: var(--secondary-color);
+    /* height: 300px; */
 }
-
-.jumbotron-temp {
-    height: ;
-}
-
 
 /* Carousel Styling */
 .jumbotron::after {
