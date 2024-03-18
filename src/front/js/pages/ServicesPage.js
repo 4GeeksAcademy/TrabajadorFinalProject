@@ -33,6 +33,7 @@ const serviceOptions = [
 
 const ServicesPage = () => {
     const [vendors, setVendors] = useState([]);
+    const [cart, setCart] = useState([]);
     const [filteredVendors, setFilteredVendors] = useState([]);
     const [filters, setFilters] = useState({
         service: '',
@@ -99,6 +100,20 @@ const ServicesPage = () => {
         event.preventDefault();
     };
 
+    const handleAddToCart = (vendor) => {
+        setCart(currentCart => {
+            const isVendorInCart = currentCart.some(item => item.id === vendor.id);
+
+            if (!isVendorInCart) {
+                return [...currentCart, { ...vendor, quantity: 1 }];
+            } else {
+                return currentCart.map(item =>
+                    item.id === vendor.id ? { ...item, quantity: item.quantity + 1 } : item
+                );
+            }
+        });
+    };
+
     return (
         <div className="services-page-container">
             <JumbotronTemplate
@@ -162,7 +177,10 @@ const ServicesPage = () => {
             <div className="row vendor-grid">
                 {vendors.map(vendor => (
                     <div key={vendor.id} className="col-sm-12 col-md-6 col-lg-4">
-                        <Card vendor={vendor} onAddToCart={() => {/* Handle add to cart logic */ }} />
+                        <Card
+                            vendor={vendor}
+                            onAddToCart={() => handleAddToCart(vendor)}
+                        />
                     </div>
                 ))}
             </div>
