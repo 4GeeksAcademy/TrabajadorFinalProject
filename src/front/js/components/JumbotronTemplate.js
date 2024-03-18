@@ -17,7 +17,7 @@ const JumbotronTemplate = ({ images, title, subtitle }) => {
   }, [images]);
 
   return (
-    <div className="jumbotron jumbotron-fluid ">
+    <div className="jumbotron jumbotron-fluid">
       <div className="carousel-triangle-wrapper"></div>
       <div className="container-fluid p-5">
         <h1>{title}</h1>
