@@ -19,10 +19,6 @@ const HomePage = () => {
       <section className="service-icons m-5">
         <ServicesOffered />
       </section>
-      {/* <section className="company-partners">
-        <h2 className='d-flex justify-content-center'>Company Partners</h2>
-        <CompanyPartnersCarousel />
-      </section> */}
     </div>
   );
 };

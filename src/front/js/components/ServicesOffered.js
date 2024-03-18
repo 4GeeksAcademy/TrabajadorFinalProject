@@ -1,5 +1,5 @@
 import React from 'react';
-import UHServices from '../../img/UHServices.png'; // adjust the path as necessary
+import CMSSystem from '../../img/CMSSystem.png';
 import EthicalHacking from '../../img/EthicalHacking.png';
 import GameDev from '../../img/GameDev.png';
 import CyberSer from '../../img/CyberSer.png';
@@ -21,7 +21,7 @@ const serviceData = [
     { icon: MLADev, label: 'Machine Learning and AI Development' },
     { icon: DAVisualization, label: 'Data Analysis and Visualization' },
     { icon: DatabaseM, label: 'Database Management' },
-    { icon: UHServices, label: 'Unethical Hacking Services' },
+    { icon: CMSSystem, label: 'Content Management System (CMS)' },
 ];
 
 const ServiceItem = ({ icon, label }) => (

@@ -66,9 +66,11 @@ def update_vendor(vendor_id):
         if not vendor:
             return jsonify({"error": "Vendor not found"}), 404
 
-        vendor.service = data.get('service', vendor.service)
+        vendor.service1 = data.get('service', vendor.service1)
+        vendor.service2 = data.get('service', vendor.service2)
         vendor.name = data.get('name', vendor.name)
-        vendor.description = data.get('description', vendor.description)
+        vendor.short_description = data.get('short_description', vendor.short_description)
+        vendor.long_description = data.get('long_description', vendor.long_description)
         vendor.reviews = data.get('reviews', vendor.reviews)
         vendor.price = data.get('price', vendor.price)
         vendor.delivery_time = data.get('delivery_time', vendor.delivery_time)
