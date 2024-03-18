@@ -4,18 +4,18 @@ import Card from '../components/Card';
 import JumbotronTemplate from '../components/JumbotronTemplate';
 import '../../styles/ServicesPage.css';
 
-const jumboServices = [
+const imagesArray = [
     '../../img/Services_Page1.png',
     '../../img/Services_Page2.png',
     '../../img/Services_Page3.png'
 ];
 
 //  Jumbotron Component
-const jumboTitle = "Check Out Our Services";
-const jumboSubtitle = "Custom Web Solutions for Your Business Needs";
+const title = "Check Out Our Services";
+const subtitle = "Custom Web Solutions for Your Business Needs";
 
 
-const ServicesPageComponent = () => {
+const ServicesPage = () => {
     const [vendors, setVendors] = useState([]);
     const [cart, setCart] = useState([]);
     const [filters, setFilters] = useState({
@@ -51,9 +51,9 @@ const ServicesPageComponent = () => {
     return (
         <div className="container services-page-container">
             <JumbotronTemplate
-                images={jumboServices}
-                title={jumboTitle}
-                subtitle={jumboSubtitle}
+                images={imagesArray}
+                title={title}
+                subtitle={subtitle}
             />
             <form className="filter-form" onSubmit={handleSearch}>
                 <div className="row">
@@ -83,4 +83,4 @@ const ServicesPageComponent = () => {
     );
 };
 
-export default ServicesPageComponent;
+export default ServicesPage;
