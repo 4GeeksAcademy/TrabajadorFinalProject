@@ -3,58 +3,45 @@ import { Button, Modal } from 'react-bootstrap';
 import '../../styles/Card.css';
 
 const Card = ({ trabajador, onAddToCart }) => {
-  const [showModal, setShowModal] = useState(false);
+    const [showModal, setShowModal] = useState(false);
 
-  const handleClose = () => setShowModal(false);
-  const handleShow = () => setShowModal(true);
-  // const isHighRated = trabajador.highRated;
-  const isHighRated = trabajador.top_rated;
+    const handleClose = () => setShowModal(false);
+    const handleShow = () => setShowModal(true);
 
-  const handleAddToCart = () => {
-    onAddToCart(trabajador);
-  };
+    const avatarUrl = trabajador.gender === 'male'
+        ? 'path_to_male_avatar_image' // Replace with actual path
+        : 'path_to_female_avatar_image'; // Replace with actual path
 
-  const imageSrc = trabajador.gender === 'female'
-    ? 'https://xsgames.co/randomusers/avatar.php?g=female'
-    : 'https://xsgames.co/randomusers/avatar.php?g=male';
+    return (
+        <div className={`card ${trabajador.top_rated ? 'top-rated-card' : ''}`}>
+            {trabajador.top_rated && <div className="top-rated-banner">Top Rated</div>}
+            <img src={avatarUrl} alt={`${trabajador.name}'s avatar`} />
+            <div className="card-body">
+                <h5 className="card-title">{trabajador.name}</h5>
+                <p className="card-text">{trabajador.description}</p>
+                <Rating rating={trabajador.rating} />
+                <div className="card-price">{trabajador.price}</div>
+                <Button className="button-62 button-62-secondary" onClick={() => onAddToCart(trabajador)}>
+                    Add to Cart
+                </Button>
+                <Button className="button-62 button-62-third" onClick={handleShow}>
+                    View Details
+                </Button>
+            </div>
 
-  return (
-    <>
-      <div className={`card ${isHighRated ? 'top-rated-card' : ''}`}>
-        {isHighRated && (
-          <div className="top-rated-banner">Top Rated</div>
-        )}
-        <div className="card-rating">
-          {isHighRated && Array.from({ length: 5 }, (_, index) => (
-            <i key={index} className="fa-solid fa-star"></i> // FontAwesome class
-          ))}
+            <Modal show={showModal} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>{trabajador.name}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{trabajador.description}</Modal.Body>
+                <Modal.Footer>
+                    <Button className="btn button-62 button-62-third" onClick={handleClose}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
-        <img src={imageSrc} className="card-img-top" alt={trabajador.name} />
-        <div className="card-body">
-          <h5 className="card-title">{trabajador.name}</h5>
-          <p className="card-text">{trabajador.description}</p>
-          <Rating value={trabajador.rating} />
-          <p className="price">From {trabajador.price}</p>
-          <Button variant="btn button-62 button-62-secondary" onClick={handleAddToCart}>Add to Cart</Button>
-          <Button variant="btn button-62 button-62-third" onClick={handleShow}>View Details</Button>
-        </div>
-      </div>
-
-      <Modal show={showModal} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>{trabajador.name}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {trabajador.description}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button className='btn button-62 button-62-third' variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
-  );
+    );
 };
 
 export default Card;
