@@ -1,35 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../components/Card';
 import '../../styles/Carousel.css';
+import axios from 'axios';
 
 const Carousel = () => {
-    const [trabajadores, setTrabajadores] = useState([]);
+    const [vendors, setVendors] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchTrabajadores = async () => {
-            try {
-                setLoading(true);
-                const response = await fetch(process.env.BACKEND_URL + "/api/vendors");
-                const data = await response.json();
-                setTrabajadores(data);
-            } catch (error) {
-                console.error('Error fetching Trabajadores:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchTrabajadores();
+        // Fetch all vendors initially
+        axios.get(process.env.BACKEND_URL + '/api/vendors')
+            .then(response => {
+                setVendors(response.data);
+                setLoading(false)
+                // setFilteredVendors(response.data);
+            })
+            .catch(error => {
+                console.error('There was an error fetching the vendor data:', error);
+            });
     }, []);
 
+
     const nextCards = () => {
-        setCurrentIndex((prevIndex) => (prevIndex + 5) % trabajadores.length);
+        setCurrentIndex((prevIndex) => (prevIndex + 5) % vendors.length);
     };
 
     const prevCards = () => {
-        setCurrentIndex((prevIndex) => (prevIndex - 5 + trabajadores.length) % trabajadores.length);
+        setCurrentIndex((prevIndex) => (prevIndex - 5 + vendors.length) % vendors.length);
     };
 
     if (loading) {
@@ -43,12 +41,10 @@ const Carousel = () => {
             <div className='container-fluid d-flex justify-content-center'>
                 <button onClick={prevCards} className="carousel-control left"><i className="fa-solid fa-arrow-left"></i></button>
                 <div className="cards-container">
-                    {trabajadores.slice(currentIndex, currentIndex + 5).map((trabajador, index) => (
+                    {vendors.slice(currentIndex, currentIndex + 5).map((vendor, index) => (
                         <Card
-                            key={trabajador.id}
-                            title={trabajador.name}
-                            description={trabajador.description}
-                            gender={index % 2 === 0 ? 'male' : 'female'}
+                            key={vendor.id}
+                            vendor={vendor}
                         />
                     ))}
                 </div>

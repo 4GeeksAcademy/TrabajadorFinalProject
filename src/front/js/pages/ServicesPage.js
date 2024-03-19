@@ -45,7 +45,7 @@ const ServicesPage = () => {
 
     useEffect(() => {
         // Fetch all vendors initially
-        axios.get('/api/vendors')
+        axios.get(process.env.BACKEND_URL + '/api/vendors')
             .then(response => {
                 setVendors(response.data);
                 setFilteredVendors(response.data);
