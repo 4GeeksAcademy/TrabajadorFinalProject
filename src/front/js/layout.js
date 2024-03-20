@@ -13,6 +13,8 @@ import '../styles/AboutUs.css';
 import AboutUs from "./pages/AboutUs";
 import ReviewPage from "./pages/Reviews"
 import CheckoutPage from "./pages/CheckoutPage"
+import PaymentStatus from "./pages/Paymentstatus.js"
+
 
 // Create your first component
 const Layout = () => {
@@ -34,6 +36,7 @@ const Layout = () => {
                     <Route path="*" element={<h1>Not found!</h1>} />
                     <Route path="/reviews" element={<ReviewPage />} />
                     <Route path="/checkout" element={<CheckoutPage />} />
+                    <Route path="/paymentstatus" element={<PaymentStatus />} />
                 </Routes>
                 <Footer />
             </ScrollToTop>

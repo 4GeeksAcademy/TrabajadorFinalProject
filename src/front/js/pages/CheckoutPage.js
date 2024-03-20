@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from '../../styles/Checkout.module.css';
 import { useCart } from '../components/CartContext.js';
+import StripeContainer from '../components/Stripe/StripeContainer.js';
+import { useNavigate } from 'react-router-dom';
 
 const CheckoutPage = () => {
+  const navigate = useNavigate();
   const { cart, removeFromCart } = useCart();
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = useState({
     fullName: '',
     email: '',
     address: '',
     phoneNumber: '',
     country: '',
-    paymentMethod: '',
   });
+  const [paymentProcessing, setPaymentProcessing] = useState(false);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,22 +25,28 @@ const CheckoutPage = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleRemoveItem = (index) => {
+    removeFromCart(index);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
     console.log('Cart:', cart);
-    setFormData({
-      fullName: '',
-      email: '',
-      address: '',
-      phoneNumber: '',
-      country: '',
-      paymentMethod: '',
-    });
-  };
 
-  const handleRemoveItem = (index) => {
-    removeFromCart(index);
+    // Simulating delay for payment processing
+    setPaymentProcessing(true);
+    setTimeout(async () => {
+      try {
+        // Your payment logic here
+        // If payment is successful, setPaymentSuccess(true);
+        setPaymentSuccess(true);
+        navigate('/paymentstatus');
+      } catch (error) {
+        console.error('Error processing payment:', error);
+      }
+      setPaymentProcessing(false);
+    }, 2000); // Adjust the delay time as needed (in milliseconds)
   };
 
   const formatPrice = (price) => {
@@ -72,23 +82,23 @@ const CheckoutPage = () => {
           />
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="phoneNumber">Phone Number:</label>
-          <input
-            type="tel"
-            id="phoneNumber"
-            name="phoneNumber"
-            value={formData.phoneNumber}
+          <label htmlFor="address">Address:</label>
+          <textarea
+            id="address"
+            name="address"
+            value={formData.address}
             onChange={handleChange}
             required
             className={styles.formControl}
           />
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="address">Address:</label>
-          <textarea
-            id="address"
-            name="address"
-            value={formData.address}
+          <label htmlFor="phoneNumber">Phone Number:</label>
+          <input
+            type="tel"
+            id="phoneNumber"
+            name="phoneNumber"
+            value={formData.phoneNumber}
             onChange={handleChange}
             required
             className={styles.formControl}
@@ -106,38 +116,41 @@ const CheckoutPage = () => {
             className={styles.formControl}
           />
         </div>
-        <div className={styles.formGroup}>
-          <label htmlFor="paymentMethod">Payment Method:</label>
-          <select
-            id="paymentMethod"
-            name="paymentMethod"
-            value={formData.paymentMethod}
-            onChange={handleChange}
-            required
-            className={styles.formControl}
-          >
-            <option value="">Select Payment Method</option>
-            <option value="credit_card">Credit Card</option>
-            <option value="paypal">PayPal</option>
-          </select>
-        </div>
+        <h6>Stripe Payment:</h6>
+        <StripeContainer
+          formData={formData}
+          setFormData={setFormData}
+          cart={cart}
+          setPaymentSuccess={setPaymentSuccess}
+        />
         <h3>Cart Items:</h3>
         {cart && cart.length > 0 ? (
           <ul>
             {cart.map((item, index) => (
               <li key={index}>
                 {item.provider} - {item.name} - {formatPrice(item.price)}
-                <button onClick={() => handleRemoveItem(index)} className={styles.removeButton}>Remove</button>
+                <button
+                  onClick={() => handleRemoveItem(index)}
+                  className={styles.removeButton}
+                >
+                  Remove
+                </button>
               </li>
             ))}
           </ul>
         ) : (
           <p>Your cart is empty.</p>
         )}
-        <button type="submit" className={styles.btnPrimary}>Place Order</button>
+        {paymentProcessing ? (
+          <p>Processing payment...</p>
+        ) : (
+          <button type="submit" className={styles.btnPrimary}>
+            Pay
+          </button>
+        )}
       </form>
     </div>
   );
-}
+};
 
 export default CheckoutPage;
