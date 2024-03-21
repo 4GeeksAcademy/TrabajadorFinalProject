@@ -26,7 +26,7 @@ const Jumbotron = () => {
 
 
   return (
-    <div className="jumbotron jumbotron-fluid ">
+    <div className="jumbotron jumbotron-main jumbotron-fluid ">
       <div className="carousel-triangle-wrapper"></div >
       <div className="container-fluid p-5">
         <h1>Looking to hire top coding freelancers?</h1>

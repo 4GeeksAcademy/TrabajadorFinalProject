@@ -39,7 +39,7 @@ const Card = ({ vendor }) => {
     return (
         <div className="card">
             {vendor.top_rated && <div className="top-rated-banner">Top Rated</div>}
-            <img src={`path/to/images/${vendor.image}`} alt={vendor.name} />
+            <img src={`/public/vendors/${vendor.image}`} alt={vendor.name} />
             <div className="card-body">
                 <h5 className="card-title">{vendor.name}</h5>
                 <p className="card-text">{vendor.short_description}</p>
