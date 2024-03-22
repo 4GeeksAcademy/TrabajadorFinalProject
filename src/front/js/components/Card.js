@@ -37,16 +37,47 @@ const Card = ({ vendor }) => {
     };
 
     return (
+        // <div className="card">
+        //     {vendor.top_rated && <div className="top-rated-banner">Top Rated <div className="card-rating">{renderStars()}</div>
+
+        //     </div>}
+        //     <img src={`/public/vendors/${vendor.image}`} alt={vendor.name} className="card-img-top" />
+        //     <div className="card-body">
+        //         <h5 className="card-title">{vendor.name}</h5>
+        //         <p className="card-text text-start">{vendor.short_description}</p>
+        //         <div className='container-fluid justify-content-start card-footer'>
+        //             <div className='row'>
+        //                 <div className='col'>
+        //                     <Button className="button-62 button-62-secondary" onClick={() => handleAddToCart(vendor)}>Add to Cart</Button>
+        //                 </div>
+        //                 <div className='col'>
+        //                     <Button className="button-62 button-62-third" onClick={handleShow}>View Details</Button>
+        //                 </div>
+        //             </div>
+        //         </div>
+        //     </div>
+
+
         <div className="card">
-            {vendor.top_rated && <div className="top-rated-banner">Top Rated</div>}
-            <img src={`/public/vendors/${vendor.image}`} alt={vendor.name} />
+            {vendor.top_rated && (
+                <div className="top-rated-banner">Top Rated <div className="card-rating">{renderStars()}</div></div>
+            )}
+            <img src={`/public/vendors/${vendor.image}`} alt={vendor.name} className="card-img-top" />
             <div className="card-body">
                 <h5 className="card-title">{vendor.name}</h5>
-                <p className="card-text">{vendor.short_description}</p>
-                <div className="card-rating">{renderStars()}</div>
-                <Button className="button-62 button-62-secondary" onClick={() => handleAddToCart(vendor)}>Add to Cart</Button>
-                <Button className="button-62 button-62-third" onClick={handleShow}>View Details</Button>
+                <p className="card-text text-start">{vendor.short_description}</p>
             </div>
+            <div className='container-fluid justify-content-start card-footer'>
+                <div className='row'>
+                    <div className='col'>
+                        <Button className="button-62 button-62-primary" onClick={() => handleAddToCart(vendor)}>Add to Cart</Button>
+                    </div>
+                    <div className='col'>
+                        <Button className="button-62 button-62-secondary" onClick={handleShow}>View Details</Button>
+                    </div>
+                </div>
+            </div>
+
 
             <Modal show={showModal} onHide={handleClose}>
                 <Modal.Header closeButton>
@@ -59,7 +90,7 @@ const Card = ({ vendor }) => {
                     <Button className="btn button-62 button-62-third" onClick={handleClose}>Close</Button>
                 </Modal.Footer>
             </Modal>
-        </div>
+        </div >
     );
 };
 
