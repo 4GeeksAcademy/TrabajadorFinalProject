@@ -81,17 +81,7 @@ const CheckoutPage = () => {
             className={styles.formControl}
           />
         </div>
-        <div className={styles.formGroup}>
-          <label htmlFor="address">Address:</label>
-          <textarea
-            id="address"
-            name="address"
-            value={formData.address}
-            onChange={handleChange}
-            required
-            className={styles.formControl}
-          />
-        </div>
+        
         <div className={styles.formGroup}>
           <label htmlFor="phoneNumber">Phone Number:</label>
           <input
