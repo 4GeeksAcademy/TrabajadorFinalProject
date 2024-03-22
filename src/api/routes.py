@@ -18,15 +18,63 @@ api = Blueprint('api', __name__)
 CORS(api)
 
 
-@api.route("/token", methods=["POST"])
-def create_token():
+@api.route("/register", methods=["POST"])
+def create_user():
+    """
+    Request body:
+    {
+        "email": "test@test.com",
+        "password": "p455w0rd"
+    }
+    """
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-    if email != "test" or password != "test":
+    db_user = User.query.filter_by(email=email).first()
+    if db_user:
+        return jsonify({"msg": "User already exists."}), 400
+    db_user = User(
+        email=email,
+        password=password,
+        is_active=True,
+    )
+    db.session.add(db_user)
+    db.session.commit()
+    return '', 204
+
+
+@api.route("/token", methods=["POST"])
+def create_token():
+    """
+    Request body:
+    {
+        "email": "test@test.com",
+        "password": "p455w0rd"
+    }
+
+    Response body:
+    {
+        "access_token": "some jwt gobbldygook"
+    }
+    """
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+    db_user = User.query.filter_by(email=email).first()
+    if not db_user:
+        return jsonify({"msg": "Bad email or password"}), 401
+
+    if password != db_user.password:
         return jsonify({"msg": "Bad email or password"}), 401
 
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token)
+
+
+@api.route("/users/active", methods=["GET"])
+@jwt_required()
+def read_current_user():
+    email = get_jwt_identity()
+    db_user = User.query.filter_by(email=email).first()
+    return jsonify(db_user.serialize())
 
 
 @api.route('/hello', methods=['POST', 'GET'])
