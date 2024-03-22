@@ -1,13 +1,17 @@
 // Import necessary libraries
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom'; // Import Link for routing
+import { Link, useNavigate } from 'react-router-dom'; // Import Link for routing
+import { Context } from "../store/appContext";
 import styles from '../../styles/SignUp.module.css'; // Import CSS module
 
 // Define Signup component
 const Signup = () => {
   // Define state variables
+  const { store, actions } = useContext(Context);
+  const navigate = useNavigate();
+
   const [signupPassword, setSignupPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState(''); // State for confirm password
   const [fullName, setFullName] = useState('');
@@ -16,31 +20,14 @@ const Signup = () => {
 
   // Function to handle signup process
   const handleSignup = async () => {
-    try {
-      // Check if password matches confirm password
-      if (signupPassword !== confirmPassword) {
-        setMessage("Passwords don't match");
-        return;
-      }
-
-      // Send signup data to server
-      const response = await fetch('/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 
-          password: signupPassword,
-          fullName,
-          email
-        }),
-      });
-
-      // Process server response
-      const data = await response.json();
-      setMessage(data.message);
-    } catch (error) {
-      console.error('Error:', error);
+    // Check if password matches confirm password
+    if (signupPassword !== confirmPassword) {
+      setMessage("Passwords don't match");
+      return;
+    }
+    const ok = await actions.register(email, signupPassword);
+    if (ok) {
+      navigate("/login");
     }
   };
 
@@ -71,8 +58,8 @@ const Signup = () => {
           Already have an account? <Link to="/login">Login</Link>
         </p>
       </div>
-     
-      
+
+
     </div>
   );
 };

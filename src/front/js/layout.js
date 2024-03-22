@@ -14,6 +14,7 @@ import AboutUs from "./pages/AboutUs";
 import ReviewPage from "./pages/Reviews"
 import CheckoutPage from "./pages/CheckoutPage"
 import PaymentStatus from "./pages/Paymentstatus.js"
+import Profile from "./pages/Profile.js";
 
 
 // Create your first component
@@ -31,6 +32,7 @@ const Layout = () => {
                     <Route path="/about-us" element={<AboutUs />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />
+                    <Route path="/profile" element={<Profile />} />
                     <Route path="/services" element={<ServicesPage />} />
                     <Route path="/contact-us" element={<ContactUs />} />
                     <Route path="*" element={<h1>Not found!</h1>} />
