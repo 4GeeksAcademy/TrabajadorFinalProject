@@ -42,4 +42,7 @@
   .btnPrimary:hover {
     background-color: #0056b3;
   }
-  
+  .checkCart {
+    color: black;
+    font-weight: bold;
+  }

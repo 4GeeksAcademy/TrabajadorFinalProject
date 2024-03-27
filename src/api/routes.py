@@ -3,19 +3,22 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 import os
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Vendor
+from api.models import db, User, Vendor, Order
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token
 from flask import jsonify
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
+import stripe
 
 # Create flask app
 api = Blueprint('api', __name__)
 
 # Allow CORS requests to this API
 CORS(api)
+
+stripe.api_key = os.getenv("STRIPE_SECRET_TEST")
 
 
 @api.route("/register", methods=["POST"])
@@ -146,3 +149,52 @@ def get_ph_vendors():
     vendors = Vendor.query.all()
     serialized_vendors = [vendor.serialize() for vendor in vendors]
     return jsonify(serialized_vendors), 200
+
+
+@api.route("/payment", methods=["POST"])
+def create_checkout():
+    """
+    Docs: https://docs.stripe.com/api/payment_intents/create
+    [] Convert this to @jwt_required()
+    [] get the user object from the DB
+    [] get the vendor object from DB based on request data
+    [] create order object based on payment intent
+    [] save that order obj to the db
+    """
+    data = request.json
+    pi = stripe.PaymentIntent.create(
+        amount=data['amount'], # Total price in pennies
+        currency="usd",
+        description="Trabajador",
+        payment_method=data["id"],
+        confirm=True,
+        automatic_payment_methods={
+            "enabled": True,
+            "allow_redirects": "never"
+        }
+    )
+    # Order might need to be refactored to just have amount?
+    # order = Order(
+    #     stripe_id=pi.stripe_id,
+    #     # hours=data['hours'],
+    #     price=data['amount'] # * data['hours'], # This needs to come from the frontend
+    #     order_state="started",
+    #     # user=db_user, # This is reliant on being logged in so we can get user obj from db
+    #     # vendor=db_vendor, # this needs to be sent along with the order
+    # )
+    return jsonify(
+        message="Payment successful",
+        success=True
+    )
+
+
+@api.route("/webhook", methods=["POST"])
+def stripe_webhook():
+    """
+    Based on this: https://docs.stripe.com/webhooks/quickstart?lang=python
+    [] Accept request from Stripe
+    [] Find the order in the db
+    [] update order in db based on webhook data.
+    [] save updated order obj back to db
+    """
+    return "", 204

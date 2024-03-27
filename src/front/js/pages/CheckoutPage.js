@@ -13,6 +13,7 @@ const CheckoutPage = () => {
     address: '',
     phoneNumber: '',
     country: '',
+    hoursToPayFor: 1, // Default value for hours to pay for
   });
   const [paymentProcessing, setPaymentProcessing] = useState(false);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
@@ -53,6 +54,12 @@ const CheckoutPage = () => {
     return `$${price.toFixed(2)}`;
   };
 
+  const calculateTotal = () => {
+    const hours = formData.hoursToPayFor;
+    const pricePerHour = 30; // Price per hour for Gladys West
+    return hours * pricePerHour;
+  };
+
   return (
     <div className={styles.checkoutContainer}>
       <h2>Checkout</h2>
@@ -81,7 +88,7 @@ const CheckoutPage = () => {
             className={styles.formControl}
           />
         </div>
-        
+
         <div className={styles.formGroup}>
           <label htmlFor="phoneNumber">Phone Number:</label>
           <input
@@ -106,6 +113,18 @@ const CheckoutPage = () => {
             className={styles.formControl}
           />
         </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="hoursToPayFor">Hours to Pay For:</label>
+          <input
+            type="number"
+            id="hoursToPayFor"
+            name="hoursToPayFor"
+            value={formData.hoursToPayFor}
+            onChange={handleChange}
+            min="1"
+            className={styles.formControl}
+          />
+        </div>
         <h6>Stripe Payment:</h6>
         <StripeContainer
           formData={formData}
@@ -114,23 +133,26 @@ const CheckoutPage = () => {
           setPaymentSuccess={setPaymentSuccess}
         />
         <h3>Cart Items:</h3>
-        {cart && cart.length > 0 ? (
-          <ul>
-            {cart.map((item, index) => (
-              <li key={index}>
-                {item.provider} - {item.name} - {formatPrice(item.price)}
-                <button
-                  onClick={() => handleRemoveItem(index)}
-                  className={styles.removeButton}
-                >
-                  Remove
-                </button>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>Your cart is empty.</p>
-        )}
+        <div className={styles.cart}>
+          {cart && cart.length > 0 ? (
+            <ul>
+              {cart.map((item, index) => (
+                <li key={index}>
+                  {item.provider} - {item.name} - {formatPrice(item.price)}
+                  <button
+                    onClick={() => handleRemoveItem(index)}
+                    className={styles.removeButton}
+                  >
+                    Remove
+                  </button>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className={styles.checkCart}>Gladys West - Price per hour: $30/hr - Specialty: Web Dev and Data Analysis</p>
+          )}
+          <h3>Total: {formatPrice(calculateTotal())}</h3>
+        </div>
         {paymentProcessing ? (
           <p>Processing payment...</p>
         ) : (

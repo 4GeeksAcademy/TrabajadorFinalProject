@@ -36,7 +36,7 @@ const StripeContainer = ({ formData, setFormData, cart, setPaymentSuccess }) => 
     if (!error) {
       try {
         const { id } = paymentMethod;
-        const response = await axios.post(process.env.STRIPE_URL + '/payment', {
+        const response = await axios.post(process.env.BACKEND_URL + '/api/payment', {
           amount: 1000,
           id,
         });
@@ -65,7 +65,7 @@ const StripeContainer = ({ formData, setFormData, cart, setPaymentSuccess }) => 
       <div style={{ marginBottom: '10px' }}>
         <CardElement options={CARD_OPTIONS} onChange={handleChange} />
       </div>
-      {/* <button onClick={handleSubmit} style={{ backgroundColor: '#007bff', color: '#fff', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Pay</button> */}
+       <button onClick={handleSubmit} style={{ backgroundColor: '#007bff', color: '#fff', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Pay</button> 
     </fieldset>
   );
 };

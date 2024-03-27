@@ -56,52 +56,40 @@ class Vendor(db.Model):
         }
 
 
-# @api.route('/vendors', methods=['GET'])
-# def get_vendors():
-#     vendor_list = Vendor.query.all()
-#     return jsonify([vendor.serialize() for vendor in vendor_list]), 200
+class Order(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    stripe_id = db.Column(db.String(64))
+    order_state = db.Column(db.String(64))
+    hours = db.Column(db.Integer)
+    price = db.Column(db.Integer)
+    
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    user = db.relationship(
+        "User",
+        uselist=False,
+        backref=db.backref(
+            "orders",
+            uselist=True,
+        )
+    )
 
+    vendor_id = db.Column(db.Integer, db.ForeignKey("vendor.id"))
+    vendor = db.relationship(
+        "Vendor",
+        uselist=False,
+        backref=db.backref(
+            "orders",
+            uselist=True,
+        )
+    )
 
-# @api.route('/vendor', methods=['POST'])
-# def add_vendor():
-#     try:
-#         data = request.json
-#         new_vendor = Vendor(
-#             service=data['service'],
-#             name=data['name'],
-#             description=data['description'],
-#             reviews=data.get('reviews', 0),
-#             price=data['price'],
-#             delivery_time=data['delivery_time'],
-#             top_rated=data.get('top_rated', False)
-#         )
-#         db.session.add(new_vendor)
-#         db.session.commit()
-#         return jsonify(new_vendor.serialize()), 201
-#     except Exception as e:
-#         return jsonify({"error": "Unable to add vendor", "message": str(e)}), 400
-
-
-# @api.route('/vendor/<int:vendor_id>', methods=['PUT'])
-# @jwt_required()
-# def update_vendor(vendor_id):
-#     try:
-#         data = request.json
-#         vendor = Vendor.query.get(vendor_id)
-#         if not vendor:
-#             return jsonify({"error": "Vendor not found"}), 404
-
-#         vendor.service1 = data.get('service', vendor.service1)
-#         vendor.service2 = data.get('service', vendor.service2)
-#         vendor.name = data.get('name', vendor.name)
-#         vendor.short_description = data.get('short_description', vendor.short_description)
-#         vendor.long_description = data.get('long_description', vendor.long_description)
-#         vendor.reviews = data.get('reviews', vendor.reviews)
-#         vendor.price = data.get('price', vendor.price)
-#         vendor.delivery_time = data.get('delivery_time', vendor.delivery_time)
-#         vendor.top_rated = data.get('top_rated', vendor.top_rated)
-
-#         db.session.commit()
-#         return jsonify(vendor.serialize()), 200
-#     except Exception as e:
-#         return jsonify({"error": "Unable to update vendor", "message": str(e)}), 400
+    def serialize(self):
+        return {
+            "id": self.id,
+            "stripe_id": self.stripe_id,
+            "order_state": self.order_state,
+            "hours": self.hours,
+            "price": self.price,
+            "user": self.user.serialize(),
+            "vendor": self.vendor.serialize(),
+        }
