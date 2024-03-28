@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import styles from '../../styles/Checkout.module.css';
 import { useCart } from '../components/CartContext.js';
-import StripeContainer from '../components/Stripe/StripeContainer.js';
 import { useNavigate } from 'react-router-dom';
+import StripeContainer from '../components/Stripe/StripeContainer.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { Button } from 'react-bootstrap';
 
 const CheckoutPage = () => {
   const navigate = useNavigate();
@@ -13,10 +16,11 @@ const CheckoutPage = () => {
     address: '',
     phoneNumber: '',
     country: '',
-    hoursToPayFor: 1, // Default value for hours to pay for
+    hoursToPayFor: 0,
   });
   const [paymentProcessing, setPaymentProcessing] = useState(false);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const cartNotEmpty = cart && cart.length > 0;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,6 +32,11 @@ const CheckoutPage = () => {
 
   const handleRemoveItem = (index) => {
     removeFromCart(index);
+  };
+
+  const handlePaymentSuccess = () => {
+    setPaymentSuccess(true);
+    navigate('/paymentstatus');
   };
 
   const handleSubmit = async (e) => {
@@ -47,16 +56,17 @@ const CheckoutPage = () => {
         console.error('Error processing payment:', error);
       }
       setPaymentProcessing(false);
-    }, 2000); // Adjust the delay time as needed (in milliseconds)
+    }, 2000);
   };
 
   const formatPrice = (price) => {
-    return `$${price.toFixed(2)}`;
+    const numericPrice = parseFloat(price);
+    return isNaN(numericPrice) ? '$30.00/Hr' : `$${numericPrice.toFixed(2)}`;
   };
 
   const calculateTotal = () => {
     const hours = formData.hoursToPayFor;
-    const pricePerHour = 30; // Price per hour for Gladys West
+    const pricePerHour = 30;
     return hours * pricePerHour;
   };
 
@@ -88,7 +98,18 @@ const CheckoutPage = () => {
             className={styles.formControl}
           />
         </div>
-
+        <div className={styles.formGroup}>
+          <label htmlFor="address">Address:</label>
+          <input
+            type="text"
+            id="address"
+            name="address"
+            value={formData.address}
+            onChange={handleChange}
+            required
+            className={styles.formControl}
+          />
+        </div>
         <div className={styles.formGroup}>
           <label htmlFor="phoneNumber">Phone Number:</label>
           <input
@@ -113,25 +134,21 @@ const CheckoutPage = () => {
             className={styles.formControl}
           />
         </div>
-        <div className={styles.formGroup}>
-          <label htmlFor="hoursToPayFor">Hours to Pay For:</label>
-          <input
-            type="number"
-            id="hoursToPayFor"
-            name="hoursToPayFor"
-            value={formData.hoursToPayFor}
-            onChange={handleChange}
-            min="1"
-            className={styles.formControl}
-          />
-        </div>
-        <h6>Stripe Payment:</h6>
-        <StripeContainer
-          formData={formData}
-          setFormData={setFormData}
-          cart={cart}
-          setPaymentSuccess={setPaymentSuccess}
-        />
+        {cartNotEmpty && (
+          <div className={styles.formGroup}>
+            <label htmlFor="hoursToPayFor">Hours to Pay For:</label>
+            <input
+              type="number"
+              id="hoursToPayFor"
+              name="hoursToPayFor"
+              value={formData.hoursToPayFor}
+              onChange={handleChange}
+              min="1"
+              disabled={!cartNotEmpty}
+              className={styles.formControl}
+            />
+          </div>
+        )}
         <h3>Cart Items:</h3>
         <div className={styles.cart}>
           {cart && cart.length > 0 ? (
@@ -139,26 +156,31 @@ const CheckoutPage = () => {
               {cart.map((item, index) => (
                 <li key={index}>
                   {item.provider} - {item.name} - {formatPrice(item.price)}
-                  <button
+                  <Button
+                    variant="danger"
                     onClick={() => handleRemoveItem(index)}
-                    className={styles.removeButton}
+                    className={`${styles.removeButton} ml-3`}
                   >
-                    Remove
-                  </button>
+                    <FontAwesomeIcon icon={faTimes} className={styles.removeIcon} />
+                  </Button>
                 </li>
               ))}
             </ul>
           ) : (
-            <p className={styles.checkCart}>Gladys West - Price per hour: $30/hr - Specialty: Web Dev and Data Analysis</p>
+            <p className={styles.checkCart}>No items in the cart</p>
           )}
           <h3>Total: {formatPrice(calculateTotal())}</h3>
         </div>
         {paymentProcessing ? (
           <p>Processing payment...</p>
         ) : (
-          <button type="submit" className={styles.btnPrimary}>
-            Pay
-          </button>
+          <StripeContainer
+            formData={formData}
+            setFormData={setFormData}
+            cart={cart}
+            total={calculateTotal()}
+            onSuccess={handlePaymentSuccess}
+          />
         )}
       </form>
     </div>

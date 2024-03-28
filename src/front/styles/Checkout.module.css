@@ -46,3 +46,6 @@
     color: black;
     font-weight: bold;
   }
+  .removeButton{
+    margin-left: 9px;
+  }

@@ -1,4 +1,5 @@
-import React from 'react';
+// PaymentForm.js
+import React, { useState, useEffect } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import axios from 'axios';
 
@@ -7,7 +8,7 @@ const CARD_OPTIONS = {
   style: {
     base: {
       iconColor: '#c4f0ff',
-      color: '#000', // Change text color to black for better visibility
+      color: '#000',
       fontWeight: 500,
       fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
       fontSize: '16px',
@@ -22,9 +23,21 @@ const CARD_OPTIONS = {
   },
 };
 
-const StripeContainer = ({ formData, setFormData, cart, setPaymentSuccess }) => {
+const PaymentForm = ({ formData, total, onSuccess }) => {
   const stripe = useStripe();
   const elements = useElements();
+  const [formComplete, setFormComplete] = useState(false);
+
+  useEffect(() => {
+    const isFormComplete =
+      formData.fullName &&
+      formData.email &&
+      formData.address &&
+      formData.phoneNumber &&
+      formData.country &&
+      formData.hoursToPayFor;
+    setFormComplete(isFormComplete);
+  }, [formData]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,13 +50,13 @@ const StripeContainer = ({ formData, setFormData, cart, setPaymentSuccess }) => 
       try {
         const { id } = paymentMethod;
         const response = await axios.post(process.env.BACKEND_URL + '/api/payment', {
-          amount: 1000,
+          amount: total * 100, // Multiply by 100 to convert to cents
           id,
         });
 
         if (response.data.success) {
           console.log('Successful payment');
-          setPaymentSuccess(true);
+          onSuccess(); // Call the success callback
         }
       } catch (error) {
         console.log('Error', error);
@@ -54,10 +67,7 @@ const StripeContainer = ({ formData, setFormData, cart, setPaymentSuccess }) => 
   };
 
   const handleChange = (e) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      stripeInfoFilled: e.complete, // Update stripeInfoFilled based on whether the input is complete
-    }));
+    setFormComplete(e.complete);
   };
 
   return (
@@ -65,9 +75,23 @@ const StripeContainer = ({ formData, setFormData, cart, setPaymentSuccess }) => 
       <div style={{ marginBottom: '10px' }}>
         <CardElement options={CARD_OPTIONS} onChange={handleChange} />
       </div>
-       <button onClick={handleSubmit} style={{ backgroundColor: '#007bff', color: '#fff', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Pay</button> 
+      <button
+        onClick={handleSubmit}
+        style={{
+          backgroundColor: '#007bff',
+          color: '#fff',
+          padding: '10px 20px',
+          border: 'none',
+          borderRadius: '5px',
+          cursor: 'pointer',
+          pointerEvents: formComplete ? 'auto' : 'none', // Disable button if form not complete
+          opacity: formComplete ? 1 : 0.5, // Reduce opacity if button is disabled
+        }}
+      >
+        Pay
+      </button>
     </fieldset>
   );
 };
 
-export default StripeContainer;
+export default PaymentForm;
